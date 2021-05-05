@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Instalar Dependencias
 
-Para instalar las dependencia o librerias se debe descargar el repositorio y usar el comando .
+Para instalar las dependencia o librerias se debe descargar el repositorio con el comando git clone y el url de el reposritorio despues de descargado se debe usar el comando .
 
 - npm install
 
