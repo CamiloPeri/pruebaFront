@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Añadir Producto</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formCategoria">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre producto</mat-label>
+      <input matInput formControlName="titleProduct" />
+      <mat-error *ngIf="formCategoria.get('titleProduct').hasError('required')">
+        Nombre <strong>requerido</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>precio</mat-label>
+      <input matInput formControlName="precio" type="text" />
+      <mat-error *ngIf="formCategoria.get('precio').hasError('required')">
+        Precio <strong>requerido</strong>
+      </mat-error>
+      <mat-error *ngIf="formCategoria.get('precio').hasError('pattern')">
+        Campo <strong>Numerico</strong>
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close cdkFocusInitial>Cancelar</button>
+  <button mat-button (click)="guardar()" [disabled]="!formCategoria.valid">
+    Guardar
+  </button>
+</div>

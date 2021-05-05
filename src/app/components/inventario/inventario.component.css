@@ -1,0 +1,59 @@
+.bordeTitulos {
+  border-bottom: 1px solid gray;
+  text-align: initial;
+  margin-bottom: 40px;
+  width: 90%;
+}
+
+mat-form-field {
+  width: 90%;
+}
+
+.listaItem {
+  display: block;
+  border-bottom: 1px solid #cecece;
+  padding: 10px;
+}
+
+.divCategorias {
+  max-height: 50vh;
+  margin-right: 10%;
+  overflow-y: scroll;
+}
+
+.divProductos {
+  overflow-y: scroll;
+  max-height: 75vh;
+}
+
+.box {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+}
+
+.alinearBoton {
+  float: right;
+  cursor: pointer;
+}
+
+.form-field-totales {
+  width: 20%;
+  margin: 17px 39px 0 0;
+}
+
+.mat-input-element:disabled {
+  color: black !important;
+}
+
+mat-form-field-label {
+  color: black !important;
+}
+
+.lista {
+  width: 100%;
+}
+
+.lista li {
+  display: flex;
+  grid-template-columns: 2fr 2fr;
+}

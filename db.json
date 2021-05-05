@@ -1,0 +1,115 @@
+{
+  "Categorias": [
+    {
+      "id": 2,
+      "category": "Juguetes",
+      "products": [
+        {
+          "titleProduct": "Carrito de madera",
+          "precio": 45000
+        },
+        {
+          "titleProduct": "Avión de juguete",
+          "precio": 72100
+        },
+        {
+          "titleProduct": "Muñeca",
+          "precio": 83210
+        },
+        {
+          "titleProduct": "nuevoJugue",
+          "precio": 230000
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "category": "Herramientas",
+      "products": [
+        {
+          "titleProduct": "martillo",
+          "precio": 45123
+        },
+        {
+          "titleProduct": "taladro",
+          "precio": 293000
+        },
+        {
+          "titleProduct": "pinzas",
+          "precio": 236000
+        },
+        {
+          "titleProduct": "puntillas",
+          "precio": 211000
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "category": "Muebles",
+      "products": [
+        {
+          "titleProduct": "mesa",
+          "precio": 1900
+        },
+        {
+          "titleProduct": "silla",
+          "precio": 25500
+        },
+        {
+          "titleProduct": "sofa",
+          "precio": 230000
+        },
+        {
+          "titleProduct": "armario",
+          "precio": 230000
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "category": "Iluminacion",
+      "products": [
+        {
+          "titleProduct": "luz led",
+          "precio": 230000
+        },
+        {
+          "titleProduct": "tubos fluorecentes",
+          "precio": 230000
+        },
+        {
+          "titleProduct": "prueba",
+          "precio": 230000
+        },
+        {
+          "titleProduct": "prueba2",
+          "precio": 230000
+        }
+      ]
+    },
+
+    {
+      "id": 1,
+      "category": "Electrodomesticos",
+      "products": [
+        {
+          "titleProduct": "Televisor",
+          "precio": 230000
+        },
+        {
+          "titleProduct": "Lavadora",
+          "precio": 12564
+        },
+        {
+          "titleProduct": "Consola de videojuegos",
+          "precio": 36432
+        },
+        {
+          "titleProduct": "Equipo de sonido",
+          "precio": 5764
+        }
+      ]
+    }
+  ]
+}

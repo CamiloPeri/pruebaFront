@@ -1,0 +1,26 @@
+<mat-drawer-container class="container-sidenav">
+  <mat-drawer-content
+    ><mat-toolbar color="primary">
+      <span class="material-icons" [style.margin-right.px]="9">
+        storefront
+      </span>
+
+      <span>Tienda</span>
+      <span class="example-spacer"></span>
+      <h3>{{ objSesion.usuario }}</h3>
+      <span
+        class="material-icons"
+        matTooltip="Cerrar sesión"
+        (click)="cerrarSesion()"
+        routerLinkActive="router-link-active"
+        [style.margin-left.px]="12"
+        style="cursor: pointer"
+      >
+        logout
+      </span>
+    </mat-toolbar>
+    <div [style.padding.px]="20">
+      <app-inventario></app-inventario>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -1,0 +1,93 @@
+<div class="box">
+  <div>
+    <h2 class="bordeTitulos">
+      Categorias
+
+      <span
+        *ngIf="botonesAgregar"
+        class="material-icons alinearBoton"
+        matTooltip="Agregar Categoria"
+        (click)="modalAgregarCategorias()"
+      >
+        post_add
+      </span>
+    </h2>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Busqueda</mat-label>
+      <input
+        [formControl]="search"
+        matInput
+        autocomplete="off"
+        (input)="filtrarDatos()"
+      />
+      <mat-icon matSuffix
+        ><span class="material-icons"> search </span></mat-icon
+      >
+    </mat-form-field>
+
+    <div class="divCategorias">
+      <mat-radio-group (change)="seleccionCategoria($event)">
+        <mat-radio-button
+          class="listaItem"
+          *ngFor="let item of categorias | filter: filtro_valor"
+          [name]="item.category"
+          [value]="item"
+        >
+          {{ item.category }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+
+  <div *ngIf="seleccionProductos">
+    <h2 class="bordeTitulos">
+      Productos
+      <span
+        *ngIf="botonesAgregar"
+        class="material-icons alinearBoton"
+        matTooltip="Agregar Productos"
+        (click)="modalAgregarProductos()"
+      >
+        add_to_photos
+      </span>
+    </h2>
+    <div class="divProductos">
+      <mat-checkbox
+        class="listaItem"
+        *ngFor="let item of productos"
+        (change)="seleccionProducto($event.source, $event.checked)"
+        [value]="item"
+        >{{ item.titleProduct }}</mat-checkbox
+      >
+    </div>
+
+    <mat-card *ngIf="!cajaProductos" [style.width.%]="90"
+      >No existen productos</mat-card
+    >
+  </div>
+</div>
+
+<form [formGroup]="formTotales">
+  <mat-form-field appearance="outline" class="form-field-totales">
+    <mat-label>Subtotal</mat-label>
+    <input matInput placeholder="Placeholder" formControlName="Subtotal" />
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="form-field-totales">
+    <mat-label>Tasa iva</mat-label>
+    <input matInput placeholder="Placeholder" formControlName="Iva" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-field-totales">
+    <mat-label>Importe</mat-label>
+    <input matInput placeholder="Placeholder" formControlName="Importe" />
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="form-field-totales">
+    <mat-label>Total</mat-label>
+    <input matInput placeholder="Placeholder" formControlName="Total" />
+  </mat-form-field>
+</form>
+
+<button mat-raised-button align="end" (click)="guardarInventario()">
+  Guardar
+</button>
