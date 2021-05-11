@@ -114,32 +114,15 @@
         },
         {
           "titleProduct": "john",
-          "precio": "213123"
+          "precio": 213123
         },
         {
           "titleProduct": "john",
-          "precio": "213123"
+          "precio": 213123
         }
       ]
     },
-    {
-      "id": 0.8096731838207478,
-      "category": "nuevovalor",
-      "products": [
-        {
-          "titleProduct": "jddddddohn",
-          "precio": "213123"
-        },
-        {
-          "titleProduct": "joadassssssdasdhn",
-          "precio": "21322123"
-        },
-        {
-          "titleProduct": "asdada",
-          "precio": 0
-        }
-      ]
-    },
+
     {
       "id": 0.25375881303889125,
       "category": "valoressssss",
@@ -155,20 +138,6 @@
         {
           "titleProduct": "esoooooo",
           "precio": "345"
-        }
-      ]
-    },
-    {
-      "id": 0.8722140229425905,
-      "category": "Nueva categoria",
-      "products": [
-        {
-          "titleProduct": "valor unico2",
-          "precio": "23"
-        },
-        {
-          "titleProduct": "werwerwe",
-          "precio": "23"
         }
       ]
     }

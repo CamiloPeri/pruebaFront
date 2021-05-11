@@ -114,21 +114,17 @@ export class InventarioComponent implements OnInit {
   }
 
   obtenerTotalesSuma(item) {
-    debugger;
     this.Subtotal = this.Subtotal + item.subtotal;
     this.Iva = this.Iva + item.iva;
     this.Total = this.Total + item.total;
   }
 
   obtenerTotalesResta(item) {
-    debugger;
-
     {
       this.Subtotal = this.Subtotal - item.subtotal;
       this.Iva = this.Iva - item.iva;
       this.Total = this.Total - item.total;
     }
-    // this.Total = elemento.total;
   }
 
   mostrarValoresFormulario() {
