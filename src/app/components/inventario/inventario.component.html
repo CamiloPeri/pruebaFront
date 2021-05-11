@@ -2,7 +2,6 @@
   <div>
     <h2 class="bordeTitulos">
       Categorias
-
       <span
         *ngIf="botonesAgregar"
         class="material-icons alinearBoton"
@@ -12,7 +11,7 @@
         post_add
       </span>
     </h2>
-
+    <!-- Filtro busqueda  -->
     <mat-form-field appearance="outline">
       <mat-label>Busqueda</mat-label>
       <input
@@ -25,6 +24,8 @@
         ><span class="material-icons"> search </span></mat-icon
       >
     </mat-form-field>
+
+    <!-- Lista Categorias  -->
 
     <div class="divCategorias">
       <mat-radio-group (change)="seleccionCategoria($event)">
@@ -39,7 +40,7 @@
       </mat-radio-group>
     </div>
   </div>
-
+  <!-- Lista Productos  -->
   <div *ngIf="seleccionProductos">
     <h2 class="bordeTitulos">
       Productos
@@ -62,11 +63,13 @@
       >
     </div>
 
-    <mat-card *ngIf="!cajaProductos" [style.width.%]="90"
+    <mat-card *ngIf="cajaProductos" [style.width.%]="90"
       >No existen productos</mat-card
     >
   </div>
 </div>
+
+<!-- Formulario de totales  -->
 
 <form [formGroup]="formTotales">
   <mat-form-field appearance="outline" class="form-field-totales">
@@ -74,20 +77,16 @@
     <input matInput placeholder="Placeholder" formControlName="Subtotal" />
   </mat-form-field>
   <mat-form-field appearance="outline" class="form-field-totales">
-    <mat-label>Tasa iva</mat-label>
+    <mat-label>Iva</mat-label>
     <input matInput placeholder="Placeholder" formControlName="Iva" />
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="form-field-totales">
-    <mat-label>Importe</mat-label>
-    <input matInput placeholder="Placeholder" formControlName="Importe" />
-  </mat-form-field>
   <mat-form-field appearance="outline" class="form-field-totales">
     <mat-label>Total</mat-label>
     <input matInput placeholder="Placeholder" formControlName="Total" />
   </mat-form-field>
 </form>
-
+<!-- Boton Guardar  -->
 <button mat-raised-button align="end" (click)="guardarInventario()">
   Guardar
 </button>

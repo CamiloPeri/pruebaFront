@@ -23,14 +23,18 @@ export class InventarioService {
   }
 
   crearCategoria(objetoCategoria: Categoria) {
-    debugger;
     const url = `${this.url}/Categorias`;
     return this.http.post(url, objetoCategoria, { headers: this.httpOptions });
   }
 
-  crearProductos(id) {
-    debugger;
+  crearProductos(id, objetoProducto) {
     const url = `${this.url}/Categorias/${id}`;
-    return this.http.delete(url);
+    return this.http.patch(url, objetoProducto, { headers: this.httpOptions });
   }
+
+  // crearProductos(id) {
+  //   ;
+  //   const url = `${this.url}/Categorias/${id}`;
+  //   return this.http.delete(url);
+  // }
 }

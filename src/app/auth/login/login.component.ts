@@ -37,9 +37,11 @@ export class LoginComponent implements OnInit {
     } else {
       Swal.fire(
         'Respuesta errada',
-        'Uusuario o contraseña incorrectos',
+        'Usuario o contraseña incorrectos',
         'error'
       );
+      this.user = '';
+      this.pass = '';
     }
   }
 }

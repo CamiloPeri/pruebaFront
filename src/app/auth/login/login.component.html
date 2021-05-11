@@ -10,7 +10,7 @@
           type="text"
           class="login-field"
           [(ngModel)]="user"
-          placeholder="username"
+          placeholder="Usuario"
           id="login-name"
         />
         <label class="login-field-icon fui-user" for="login-name"></label>
@@ -21,7 +21,7 @@
           type="password"
           class="login-field"
           [(ngModel)]="pass"
-          placeholder="password"
+          placeholder="Contraseña"
           id="login-pass"
         />
         <label class="login-field-icon fui-lock" for="login-pass"></label>
@@ -30,21 +30,26 @@
       <a class="btn btn-primary btn-large btn-block" (click)="iniciarSesion()"
         >login</a
       >
-      <a class="login-link" href="#">Lost your password?</a>
+      <a
+        class="login-link"
+        [routerLink]="['/Login']"
+        routerLinkActive="router-link-active"
+        >¿Olvido su contraseña¡?</a
+      >
     </div>
   </div>
 
   <div>
     <p>Acceso usuario</p>
     <ul>
-      <li>Username : usuario</li>
-      <li>password: usuario1</li>
+      <li>Usuario : usuario</li>
+      <li>Contraseña: usuario1</li>
     </ul>
 
     <p>Acceso administrador</p>
     <ul>
-      <li>Username : admin</li>
-      <li>password: admin1</li>
+      <li>Usuario : admin</li>
+      <li>Contraseña: admin1</li>
     </ul>
   </div>
 </div>

@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { CurrencyPipe } from '@angular/common';
 import { CrearProductosComponent } from '../crear-productos/crear-productos.component';
 import _ from 'lodash';
+
 @Component({
   selector: 'app-inventario',
   templateUrl: './inventario.component.html',
@@ -22,19 +23,21 @@ export class InventarioComponent implements OnInit {
   public seleccionProductos: boolean;
   public cajaProductos: boolean;
   public arregloProductos: any;
-  public total: number = 0;
-  public iva: number = 0.16;
-  importe: number;
-  productoSeleccionado: any;
-  grupoCategoria: any;
-  objSesion: any;
-  botonesAgregar: boolean;
+  public Total: number = 0;
+  public Iva: number = 0;
+  public Subtotal: number = 0;
+  public productoSeleccionado: any;
+  public grupoCategoria: any;
+  public objSesion: any;
+  public botonesAgregar: boolean;
+  public operacionIva: number;
+  public OperacionTotal: any;
+
   constructor(
     public _servicioInventario: InventarioService,
     public dialog: MatDialog,
     private currencyPipe: CurrencyPipe
   ) {
-    debugger;
     this.arregloProductos = [];
     this.objSesion = JSON.parse(localStorage.getItem('objSesion'));
     if (this.objSesion.permiso === 'ningun permiso') {
@@ -56,7 +59,6 @@ export class InventarioComponent implements OnInit {
   }
 
   filtrarDatos() {
-    debugger;
     if (this.search.valid === true) {
       this.search.valueChanges.pipe().subscribe((value) => {
         this.filtro_valor = value;
@@ -68,53 +70,72 @@ export class InventarioComponent implements OnInit {
 
   seleccionCategoria(evento) {
     this.grupoCategoria = evento.value;
-    if (evento.value.products.length !== 0) {
+    if (evento.value.products.length === 0) {
       this.productos = evento.value.products;
       this.cajaProductos = true;
       this.seleccionProductos = true;
       this.resetFormulario();
     } else {
+      this.productos = evento.value.products;
       this.cajaProductos = false;
+      this.seleccionProductos = true;
+      this.arregloProductos = [];
     }
   }
 
   seleccionProducto(valor, seleccion) {
-    debugger;
     if (seleccion === true) {
       this.productoSeleccionado = valor.value;
-      this.arregloProductos.push(this.productoSeleccionado);
-      this.obtenerImporteyTotales();
+
+      this.operacionIva = this.productoSeleccionado.precio * 0.19;
+      this.OperacionTotal =
+        this.operacionIva + this.productoSeleccionado.precio;
+
+      let objetoNuevoValores = {
+        titulo: this.productoSeleccionado.titleProduct,
+        subtotal: this.productoSeleccionado.precio,
+        iva: this.operacionIva,
+        total: this.OperacionTotal,
+      };
+      this.arregloProductos.push(objetoNuevoValores);
+
+      this.obtenerTotalesSuma(objetoNuevoValores);
+
       this.mostrarValoresFormulario();
     } else {
-      var indice = this.arregloProductos.indexOf();
-      this.arregloProductos.splice(indice, 1);
-
-      if (this.arregloProductos.length === 0) {
-        this.InicializarFormularioTotales();
-      } else {
-        this.importe = (this.productoSeleccionado.precio * this.iva) / 100;
-        this.arregloProductos.forEach((element) => {
-          this.total -= element.precio;
-        });
-        this.mostrarValoresFormulario();
-      }
+      this.arregloProductos.forEach((item, index, object) => {
+        if (item.titulo === this.productoSeleccionado.titleProduct) {
+          this.obtenerTotalesResta(item);
+          object.splice(index, 1);
+          this.mostrarValoresFormulario();
+        }
+      });
     }
   }
 
-  obtenerImporteyTotales() {
-    this.importe = (this.productoSeleccionado.precio * this.iva) / 100;
-    this.arregloProductos.forEach((element) => {
-      this.total += element.precio;
-    });
+  obtenerTotalesSuma(item) {
+    debugger;
+    this.Subtotal = this.Subtotal + item.subtotal;
+    this.Iva = this.Iva + item.iva;
+    this.Total = this.Total + item.total;
+  }
+
+  obtenerTotalesResta(item) {
+    debugger;
+
+    {
+      this.Subtotal = this.Subtotal - item.subtotal;
+      this.Iva = this.Iva - item.iva;
+      this.Total = this.Total - item.total;
+    }
+    // this.Total = elemento.total;
   }
 
   mostrarValoresFormulario() {
-    debugger;
     this.formTotales.patchValue({
-      Subtotal: this.currencyPipe.transform(this.productoSeleccionado.precio),
-      Importe: this.importe,
-      Iva: `${this.iva}%`,
-      Total: this.currencyPipe.transform(this.total),
+      Subtotal: this.currencyPipe.transform(this.Subtotal),
+      Iva: this.currencyPipe.transform(this.Iva),
+      Total: this.currencyPipe.transform(this.Total),
     });
   }
 
@@ -123,36 +144,29 @@ export class InventarioComponent implements OnInit {
     dialogComponent.data = false;
     dialogComponent.autoFocus = false;
     dialogComponent.disableClose = false;
-    const dialogRef = this.dialog.open(
-      CrearCategoriaComponent,
-
-      {
-        width: '250px',
-      }
-    );
+    const dialogRef = this.dialog.open(CrearCategoriaComponent, {
+      width: '250px',
+    });
 
     dialogRef.afterClosed().subscribe((data) => {
-      debugger;
       if (data) {
         this._servicioInventario.crearCategoria(data).subscribe((res) => {
-          this.obtenerListaCategorias();
-
           Swal.fire(
             'Respuesta exitosa',
             'Categoria agregada correctamente',
             'success'
           );
+          this.obtenerListaCategorias();
         });
       }
     });
   }
 
   resetFormulario() {
-    this.total = 0;
+    this.Total = 0;
     this.arregloProductos = [];
     this.formTotales.patchValue({
       Subtotal: 0,
-      Importe: 0,
       Iva: 0,
       Total: 0,
     });
@@ -164,35 +178,20 @@ export class InventarioComponent implements OnInit {
     dialogComponent.autoFocus = true;
     dialogComponent.disableClose = false;
 
-    const dialogRef = this.dialog.open(
-      CrearProductosComponent,
-
-      {
-        width: '250px',
-      }
-    );
-
+    const dialogRef = this.dialog.open(CrearProductosComponent, {
+      width: '250px',
+    });
     dialogRef.afterClosed().subscribe((data) => {
-      debugger;
       if (data) {
         this.grupoCategoria.products.push(data);
-
-        const NuevoObjeto = _.cloneDeep(this.grupoCategoria);
-
         this._servicioInventario
-          .crearProductos(this.grupoCategoria.id)
+          .crearProductos(this.grupoCategoria.id, this.grupoCategoria)
           .subscribe((res) => {
-            NuevoObjeto.products.push(data);
-            this._servicioInventario
-              .crearCategoria(NuevoObjeto)
-              .subscribe((res) => {
-                this.obtenerListaCategorias();
-                Swal.fire(
-                  'Respuesta exitosa',
-                  'Categoria agregada correctamente',
-                  'success'
-                );
-              });
+            Swal.fire(
+              'Respuesta exitosa',
+              'Categoria agregada correctamente',
+              'success'
+            );
           });
       }
     });
@@ -209,7 +208,7 @@ export class InventarioComponent implements OnInit {
     this.formTotales = new FormGroup({
       Subtotal: new FormControl({ value: 0, disabled: true }),
       Iva: new FormControl({ value: 0, disabled: true }),
-      Importe: new FormControl({ value: 0, disabled: true }),
+
       Total: new FormControl({ value: 0, disabled: true }),
     });
   }
